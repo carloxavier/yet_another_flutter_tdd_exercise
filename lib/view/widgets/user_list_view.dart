@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:userinfo/view/pages/user_detail_page.dart';
 import 'package:userinfo/view/presenters/user_list_presenter.dart';
 import 'package:userinfo/view/presenters/user_list_presenter_impl.dart';
 import 'package:userinfo/view/viewmodels/user_list_view_model.dart';
@@ -29,7 +30,18 @@ class UserListView extends StatelessWidget {
             return ListView.builder(
               itemCount: viewmodel.users.length,
               itemBuilder: (_, position) {
-                return Text(viewmodel.users[position].name);
+                final user = viewmodel.users[position];
+                return ListTile(
+                  title: Text(user.name),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => UserDetailPage(user),
+                      ),
+                    );
+                  },
+                );
               },
             );
           }

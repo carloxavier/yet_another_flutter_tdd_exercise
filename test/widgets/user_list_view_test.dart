@@ -8,11 +8,14 @@ import 'package:userinfo/view/widgets/user_list_view.dart';
 
 class MockUserListPresenter extends Mock implements UserListPresenter {}
 
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+
 void main() {
   UserListPresenter mockPresenter;
-
+  NavigatorObserver mockNavigatorObserver;
   setUp(() {
     mockPresenter = MockUserListPresenter();
+    mockNavigatorObserver = MockNavigatorObserver();
   });
 
   Future showUserList(WidgetTester tester) async {
@@ -20,6 +23,7 @@ void main() {
       home: Scaffold(
         body: UserListView(userListPresenter: mockPresenter),
       ),
+      navigatorObservers: [mockNavigatorObserver],
     ));
   }
 
@@ -66,5 +70,23 @@ void main() {
     expect(find.byType(ListView), findsOneWidget);
     expect(find.text('Carlo Lopez'), findsOneWidget);
     expect(find.text('Daniel Martinez'), findsOneWidget);
+  });
+
+  testWidgets('navigate to detail page on click', (WidgetTester tester) async {
+    when(mockPresenter.getUserList()).thenAnswer(
+      (_) => Future.value(
+        UserListViewModel([
+          UserViewModel('Juan Arango'),
+          UserViewModel('Rafa Nadal'),
+        ]),
+      ),
+    );
+
+    await showUserList(tester);
+    await tester.pump();
+    await tester.tap(find.text('Juan Arango'));
+    await tester.pump();
+
+    verify(mockNavigatorObserver.didPush(any, any));
   });
 }
