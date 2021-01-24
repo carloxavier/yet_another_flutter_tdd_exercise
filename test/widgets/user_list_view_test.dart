@@ -68,6 +68,7 @@ void main() {
     await tester.pump();
 
     expect(find.byType(ListView), findsOneWidget);
+    expect(find.byType(UserListTileView), findsNWidgets(2));
     expect(find.text('Carlo Lopez'), findsOneWidget);
     expect(find.text('Daniel Martinez'), findsOneWidget);
   });
