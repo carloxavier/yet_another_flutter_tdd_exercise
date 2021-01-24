@@ -8,7 +8,11 @@ class UsersRepositoryImpl extends UsersRepository {
 
   @override
   Future<List<User>> getUsers() {
-    var users = dataSource.users.map((jsonUser) => User.fromJson(jsonUser));
+    final usersJson = dataSource.users;
+    if (usersJson == null) {
+      return Future.value([]);
+    }
+    var users = usersJson.map((jsonUser) => User.fromJson(jsonUser));
     return Future.value(users.toList());
   }
 }
