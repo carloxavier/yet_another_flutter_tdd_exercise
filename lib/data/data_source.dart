@@ -1,5 +1,6 @@
 class DataSource {
-  static const users = [
+  const DataSource();
+  final users = const [
     {
       "id": 1,
       "name": "Leanne Graham",

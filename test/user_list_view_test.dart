@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:userinfo/view/pages/home_page.dart';
 import 'package:userinfo/view/presenters/user_list_presenter.dart';
 import 'package:userinfo/view/viewmodels/user_list_view_model.dart';
 import 'package:userinfo/view/viewmodels/user_view_model.dart';
+import 'package:userinfo/view/widgets/user_list_view.dart';
 
 class MockUserListPresenter extends Mock implements UserListPresenter {}
 

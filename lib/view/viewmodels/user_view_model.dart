@@ -1,5 +1,5 @@
 class UserViewModel {
   final String name;
 
-  UserViewModel(this.name);
+  const UserViewModel(this.name);
 }
