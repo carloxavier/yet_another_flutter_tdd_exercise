@@ -4,13 +4,23 @@ import 'package:userinfo/view/pages/home_page.dart';
 import 'package:userinfo/view/widgets/user_list_view.dart';
 
 void main() {
-  testWidgets('show user list', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: Scaffold(
-        body: HomePage(),
+  Future<void> showHomePage(WidgetTester tester) async {
+    return await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(body: HomePage()),
       ),
-    ));
+    );
+  }
+
+  testWidgets('show user list', (WidgetTester tester) async {
+    await showHomePage(tester);
 
     expect(find.byType(UserListView), findsOneWidget);
+  });
+
+  testWidgets('show app bar', (WidgetTester tester) async {
+    await showHomePage(tester);
+
+    expect(find.byType(AppBar), findsOneWidget);
   });
 }
