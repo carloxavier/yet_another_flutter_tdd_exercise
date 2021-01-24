@@ -32,6 +32,9 @@ class UserListView extends StatelessWidget {
               itemBuilder: (_, position) {
                 final user = viewmodel.users[position];
                 return ListTile(
+                  leading: CircleAvatar(
+                    child: Text(user.name.characters.first),
+                  ),
                   title: Text(user.name),
                   onTap: () {
                     Navigator.push(
